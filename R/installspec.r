@@ -34,6 +34,7 @@ installspec <- function(
     dir.create(tmp_name)
     file.copy(srcdir, tmp_name, recursive = TRUE)
     spec_path <- file.path(tmp_name, 'kernelspec', 'kernel.json')
+    system2('chmod', args = c('-R', 'u+w', file.path(tmp_name, 'kernelspec')))
     spec <- fromJSON(spec_path)
     spec$argv[[1]] <- file.path(R.home('bin'), 'R')
     spec$display_name <- displayname
